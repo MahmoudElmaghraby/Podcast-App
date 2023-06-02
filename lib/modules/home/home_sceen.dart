@@ -8,71 +8,94 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: backTextColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 30,
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 30,
+              ),
+              child: _buildCustomAppBar(),
             ),
-            child: _buildCustomAppBar(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Explore',
-              style: TextStyle(
-                color: textColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Explore',
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildUnderExploreContainers('Top in Egypt'),
-              _buildUnderExploreContainers('Recently Played'),
-            ],
-          ),
-          const SizedBox(height: 16),
-          _buildMostSharedCard(),
-          Expanded(
-            child: ListView.builder(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildUnderExploreContainers('Top in Egypt'),
+                _buildUnderExploreContainers('Recently Played'),
+              ],
+            ),
+            const SizedBox(height: 16),
+            _buildMostSharedCard(),
+            ListView.builder(
+              shrinkWrap: true,
               itemBuilder: (context, index) {
-                return _buildListTile();
+                return _buildListTile(context);
               },
               itemCount: 20,
               physics: const BouncingScrollPhysics(),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
-Widget _buildListTile() {
+Widget _buildListTile(BuildContext context) {
   return ListTile(
     leading: ClipRRect(
       borderRadius: BorderRadius.circular(50),
       child: Image.asset('assets/images/main_img.jpeg'),
     ),
-    title: const Text('Main title'),
-    subtitle: const Text('Sub title'),
+    title: Text(
+      'Music title',
+      style: TextStyle(
+        color: textColor,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    subtitle: Text(
+      'Music artist name',
+      style: TextStyle(color: textColor),
+    ),
     onTap: () {},
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.favorite),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add),
-        ),
-      ],
+    trailing: IconButton(
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Wrap(
+              children: const [
+                ListTile(
+                  title: Text('Love'),
+                  leading: Icon(Icons.favorite),
+                ),
+                ListTile(
+                  title: Text('Subscribe'),
+                  leading: Icon(Icons.add),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      icon: Icon(
+        Icons.more_vert,
+        color: textColor,
+      ),
     ),
   );
 }

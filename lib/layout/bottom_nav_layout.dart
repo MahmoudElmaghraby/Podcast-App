@@ -4,6 +4,7 @@ import 'package:podcast_app/modules/listen/listen_screen.dart';
 import 'package:podcast_app/modules/profile/profile_screen.dart';
 import 'package:podcast_app/modules/search/search_screen.dart';
 import 'package:podcast_app/shared/components/components.dart';
+import 'package:podcast_app/shared/styles/constants.dart';
 
 class BottomNavLayout extends StatefulWidget {
   const BottomNavLayout({super.key});
@@ -24,17 +25,26 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        selectedItemColor: textColor,
+        unselectedItemColor: deadColor,
+        backgroundColor: backgroundColor,
+        items:const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.headphones),
+            icon: Icon(
+              Icons.headphones,
+            ),
             label: 'Listen',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+            ),
             label: 'Profile',
           ),
         ],
