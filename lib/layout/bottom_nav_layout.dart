@@ -23,18 +23,6 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Podcast Player'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              navigateTo(context, const SearchScreen());
-            },
-            icon: const Icon(Icons.search),
-            tooltip: 'Search',
-          ),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
