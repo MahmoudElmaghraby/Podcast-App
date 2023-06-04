@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:podcast_app/modules/search/search_screen.dart';
+import 'package:podcast_app/shared/components/components.dart';
 import 'package:podcast_app/shared/styles/constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(
                 top: 30,
               ),
-              child: _buildCustomAppBar(),
+              child: _buildCustomAppBar(context),
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
@@ -184,7 +186,7 @@ Widget _buildMostSharedCard() {
   );
 }
 
-Widget _buildCustomAppBar() {
+Widget _buildCustomAppBar(BuildContext context) {
   return ListTile(
     leading: ClipRRect(
       borderRadius: BorderRadius.circular(50),
@@ -207,5 +209,15 @@ Widget _buildCustomAppBar() {
       ),
     ),
     onTap: () {},
+    trailing: IconButton(
+      icon: const Icon(Icons.search),
+      color: textColor,
+      onPressed: () {
+        navigateTo(
+          context,
+          const SearchScreen(),
+        );
+      },
+    ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:podcast_app/shared/styles/constants.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -6,43 +7,49 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backTextColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top,
-            left: 8,
-          ),
+              top: MediaQuery.of(context).padding.top, left: 16, right: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  const Text(
-                    'Search',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  SizedBox(
-                    width: 250,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.search,
-                          ),
-                        ),
-                        border: const OutlineInputBorder(),
-                        labelText: 'Type here',
+              const SizedBox(height: 30),
+              Text(
+                'Search & Discover',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: textColor,
+                ),
+              ),
+              const SizedBox(height: 15),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: TextField(
+                  decoration: InputDecoration(
+                    fillColor: textColor,
+                    filled: true,
+                    labelStyle: TextStyle(color: deadColor),
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.mic,
                       ),
                     ),
+                    hintText: 'Songs, artists, playlists, etc...',
                   ),
-                ],
+                ),
               ),
               const SizedBox(height: 16),
+              Text(
+                'Popular',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: textColor,
+                ),
+              ),
               Container(
                 height: 600,
                 child: ListView.builder(

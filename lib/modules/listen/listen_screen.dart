@@ -1,111 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:podcast_app/shared/styles/constants.dart';
 
 class ListenScreen extends StatelessWidget {
   const ListenScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Stack(
-          children: [
-            Image.asset(
-              'assets/images/cover.jpg',
-              fit: BoxFit.cover,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      color: backTextColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 100),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              'assets/images/main_img.jpeg',
+              height: 300,
               width: double.infinity,
+              fit: BoxFit.cover,
             ),
-            Positioned.fill(
-              child: Align(
-                alignment: Alignment.center,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/main_img.jpeg',
-                    height: 200,
-                    width: 200,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+          ),
+          const Spacer(),
+          Text(
+            'Podcast title name',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: textColor,
             ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          const SizedBox(height: 7),
+          Text(
+            'Author name',
+            style: TextStyle(
+              fontSize: 20,
+              color: textColor,
+            ),
+          ),
+          Slider(
+            min: 0,
+            max: Duration.zero.inSeconds.toDouble(),
+            value: Duration.zero.inSeconds.toDouble(),
+            onChanged: (value) {},
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Podcast title name',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+              Text(
+                '00:00',
+                style: TextStyle(color: textColor),
               ),
-              const SizedBox(height: 15),
-              const Text(
-                'Desc. (a long description for this podcast in details)',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 15),
-              const Text(
-                'NOTES : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
-              const SizedBox(height: 40),
-              Row(
-                children: [
-                  _buildPlayButtons(Icons.access_alarms, context),
-                  _buildPlayButtons(Icons.arrow_back, context),
-                  _buildPlayButtons(Icons.arrow_forward, context),
-                  _buildPlayButtons(Icons.stop, context),
-                  _buildPlayButtons(Icons.favorite, context),
-                  _buildPlayButtons(Icons.add, context),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Bookmark this podcast'),
-                ),
+              Text(
+                '03:24',
+                style: TextStyle(color: textColor),
               ),
             ],
           ),
-        ),
-
-        // TextButton(onPressed: (){}, child: child),
-      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildPlayButtons(
+                iconData: Icons.favorite_border,
+                context: context,
+                buttonWidth: 40,
+                buttonHeight: 35,
+                iconSize: 20,
+              ),
+              _buildPlayButtons(
+                iconData: Icons.arrow_back,
+                context: context,
+              ),
+              _buildPlayButtons(
+                  iconData: Icons.play_arrow,
+                  context: context,
+                  buttonHeight: 75,
+                  buttonWidth: 75,
+                  iconSize: 60),
+              _buildPlayButtons(
+                iconData: Icons.arrow_forward,
+                context: context,
+              ),
+              _buildPlayButtons(
+                iconData: Icons.add,
+                context: context,
+                buttonWidth: 40,
+                buttonHeight: 35,
+                iconSize: 20,
+              ),
+            ],
+          ),
+          const Spacer(),
+        ],
+      ),
     );
   }
 }
 
-Widget _buildPlayButtons(IconData iconData, BuildContext context) {
-  return Expanded(
-    child: Row(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                iconData,
-                color: Colors.white,
-              ),
-            ),
-          ),
+Widget _buildPlayButtons({
+  required IconData iconData,
+  required BuildContext context,
+  double buttonHeight = 50,
+  double buttonWidth = 50,
+  double iconSize = 30,
+}) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(50),
+    child: Container(
+      height: buttonHeight,
+      width: buttonWidth,
+      color: Theme.of(context).primaryColor,
+      child: IconButton(
+        onPressed: () {},
+        icon: Icon(
+          iconData,
+          color: Colors.white,
+          size: iconSize,
         ),
-        const SizedBox(width: 10),
-      ],
+      ),
     ),
   );
 }

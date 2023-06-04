@@ -24,6 +24,7 @@ class _BottomNavLayoutState extends State<BottomNavLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backTextColor,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: textColor,
         unselectedItemColor: deadColor,
