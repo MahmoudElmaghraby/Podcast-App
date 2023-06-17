@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            _buildMostSharedCard(),
+            buildMostSharedCard(),
             ListView.builder(
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -121,7 +121,7 @@ Widget _buildUnderExploreContainers(String text) {
   );
 }
 
-Widget _buildMostSharedCard() {
+Widget buildMostSharedCard() {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: Card(
